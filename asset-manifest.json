@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "/firebase-blog-app/static/css/main.7eee306d.css",
-    "main.js": "/firebase-blog-app/static/js/main.fb3bc90a.js",
+    "main.css": "/firebase-blog-app/static/css/main.f2ebbc7a.css",
+    "main.js": "/firebase-blog-app/static/js/main.e1a70e71.js",
     "static/js/453.10c2f88b.chunk.js": "/firebase-blog-app/static/js/453.10c2f88b.chunk.js",
-    "static/media/logo.svg": "/firebase-blog-app/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/firebase-blog-app/index.html",
-    "main.7eee306d.css.map": "/firebase-blog-app/static/css/main.7eee306d.css.map",
-    "main.fb3bc90a.js.map": "/firebase-blog-app/static/js/main.fb3bc90a.js.map",
+    "main.f2ebbc7a.css.map": "/firebase-blog-app/static/css/main.f2ebbc7a.css.map",
+    "main.e1a70e71.js.map": "/firebase-blog-app/static/js/main.e1a70e71.js.map",
     "453.10c2f88b.chunk.js.map": "/firebase-blog-app/static/js/453.10c2f88b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7eee306d.css",
-    "static/js/main.fb3bc90a.js"
+    "static/css/main.f2ebbc7a.css",
+    "static/js/main.e1a70e71.js"
   ]
 }
