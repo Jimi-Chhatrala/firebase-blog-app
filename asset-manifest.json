@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/firebase-blog-app/static/css/main.f2ebbc7a.css",
-    "main.js": "/firebase-blog-app/static/js/main.e1a70e71.js",
+    "main.css": "/firebase-blog-app/static/css/main.9e71d6e8.css",
+    "main.js": "/firebase-blog-app/static/js/main.ab30ee94.js",
     "static/js/453.10c2f88b.chunk.js": "/firebase-blog-app/static/js/453.10c2f88b.chunk.js",
     "index.html": "/firebase-blog-app/index.html",
-    "main.f2ebbc7a.css.map": "/firebase-blog-app/static/css/main.f2ebbc7a.css.map",
-    "main.e1a70e71.js.map": "/firebase-blog-app/static/js/main.e1a70e71.js.map",
+    "main.9e71d6e8.css.map": "/firebase-blog-app/static/css/main.9e71d6e8.css.map",
+    "main.ab30ee94.js.map": "/firebase-blog-app/static/js/main.ab30ee94.js.map",
     "453.10c2f88b.chunk.js.map": "/firebase-blog-app/static/js/453.10c2f88b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f2ebbc7a.css",
-    "static/js/main.e1a70e71.js"
+    "static/css/main.9e71d6e8.css",
+    "static/js/main.ab30ee94.js"
   ]
 }
