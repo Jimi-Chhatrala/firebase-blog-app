@@ -4,7 +4,7 @@ import "./media-query.css";
 import Home from "./pages/Home";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Detail from "./pages/Detail";
 import AddEditBlog from "./pages/AddEditBlog";
 import About from "./pages/About";
@@ -13,10 +13,12 @@ import Header from "./components/Header";
 import { useEffect, useState } from "react";
 import Auth from "./pages/Auth";
 import { auth } from "./firebase";
+import { signOut } from "firebase/auth";
 
 function App() {
   const [active, setActive] = useState("home");
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
@@ -28,9 +30,22 @@ function App() {
     });
   }, []);
 
+  const handleLogout = () => {
+    signOut(auth).then(() => {
+      setUser(null);
+      setActive("login");
+      navigate("/firebase-blog-app/auth");
+    });
+  };
+
   return (
     <div className="App">
-      <Header setActive={setActive} active={active} user={user} />
+      <Header
+        setActive={setActive}
+        active={active}
+        user={user}
+        handleLogout={handleLogout}
+      />
       <ToastContainer position="top-center" />
       <Routes>
         <Route path="firebase-blog-app/" element={<Home />} />
