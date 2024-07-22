@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Header = ({ active, setActive }) => {
+const Header = ({ active, setActive, user }) => {
+  const userId = user?.uid;
+  // console.log(userId);
+  // console.log(user?.displayName);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid bg-faded padding-media">
@@ -66,19 +69,40 @@ const Header = ({ active, setActive }) => {
               </ul>
               <div className="row g-3">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                  <Link
-                    to={"firebase-blog-app/auth"}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <li
-                      className={`nav-item nav-link ${
-                        active === "login" ? "active" : ""
-                      }`}
-                      onClick={() => setActive("login")}
+                  {userId ? (
+                    <>
+                      <div className="profile-logo">
+                        <img
+                          src={require("../profile-image.png")}
+                          alt="user profile image"
+                          style={{
+                            width: "30px",
+                            height: "30px",
+                            borderRadius: "50%",
+                            marginTop: "8px",
+                          }}
+                        />
+                      </div>
+                      <p style={{ marginTop: "12px", marginLeft: "5px" }}>
+                        {user?.displayName}
+                      </p>
+                      <li className="nav-item nav-link">Logout</li>
+                    </>
+                  ) : (
+                    <Link
+                      to={"firebase-blog-app/auth"}
+                      style={{ textDecoration: "none" }}
                     >
-                      Login
-                    </li>
-                  </Link>
+                      <li
+                        className={`nav-item nav-link ${
+                          active === "login" ? "active" : ""
+                        }`}
+                        onClick={() => setActive("login")}
+                      >
+                        Login
+                      </li>
+                    </Link>
+                  )}
                 </ul>
               </div>
             </div>
