@@ -18,14 +18,17 @@ function App() {
   return (
     <div className="App">
       <Header setActive={setActive} active={active} />
-      <ToastContainer />
+      <ToastContainer position="top-center" />
       <Routes>
         <Route path="firebase-blog-app/" element={<Home />} />
         <Route path="firebase-blog-app/detail/:id" element={<Detail />} />
         <Route path="firebase-blog-app/create" element={<AddEditBlog />} />
         <Route path="firebase-blog-app/update/:id" element={<AddEditBlog />} />
         <Route path="firebase-blog-app/about" element={<About />} />
-        <Route path="firebase-blog-app/auth" element={<Auth />} />
+        <Route
+          path="firebase-blog-app/auth"
+          element={<Auth setActive={setActive} />}
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
