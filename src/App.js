@@ -50,7 +50,10 @@ function App() {
       <Routes>
         <Route path="firebase-blog-app/" element={<Home />} />
         <Route path="firebase-blog-app/detail/:id" element={<Detail />} />
-        <Route path="firebase-blog-app/create" element={<AddEditBlog />} />
+        <Route
+          path="firebase-blog-app/create"
+          element={<AddEditBlog user={user} setActive={setActive} />}
+        />
         <Route path="firebase-blog-app/update/:id" element={<AddEditBlog />} />
         <Route path="firebase-blog-app/about" element={<About />} />
         <Route
