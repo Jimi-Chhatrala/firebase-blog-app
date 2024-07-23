@@ -107,7 +107,7 @@ const AddEditBlog = ({ user, setActive }) => {
       }
     }
 
-    navigate("/firebase-blog-app");
+    navigate("firebase-blog-app/");
     setActive("home");
   };
 

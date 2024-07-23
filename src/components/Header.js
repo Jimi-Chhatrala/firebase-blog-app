@@ -27,7 +27,7 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                 id="navbarSupportedContent"
               >
                 <Link
-                  to={"firebase-blog-app/"}
+                  to={"firebase-blog-app"}
                   style={{ textDecoration: "none" }}
                 >
                   <li

@@ -4,7 +4,7 @@ import "./media-query.css";
 import Home from "./pages/Home";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import Detail from "./pages/Detail";
 import AddEditBlog from "./pages/AddEditBlog";
 import About from "./pages/About";
@@ -52,9 +52,24 @@ function App() {
         <Route path="firebase-blog-app/detail/:id" element={<Detail />} />
         <Route
           path="firebase-blog-app/create"
-          element={<AddEditBlog user={user} setActive={setActive} />}
+          element={
+            user?.uid ? (
+              <AddEditBlog user={user} setActive={setActive} />
+            ) : (
+              <Navigate to={"/firebase-blog-app"} />
+            )
+          }
         />
-        <Route path="firebase-blog-app/update/:id" element={<AddEditBlog />} />
+        <Route
+          path="firebase-blog-app/update/:id"
+          element={
+            user?.uid ? (
+              <AddEditBlog user={user} setActive={setActive} />
+            ) : (
+              <Navigate to={"/firebase-blog-app"} />
+            )
+          }
+        />
         <Route path="firebase-blog-app/about" element={<About />} />
         <Route
           path="firebase-blog-app/auth"
