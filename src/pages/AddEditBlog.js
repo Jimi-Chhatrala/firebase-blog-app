@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "@pathofdev/react-tag-input/build/index.css";
 import ReactTagInput from "@pathofdev/react-tag-input";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { db, storage } from "../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import QuillEditor from "../QuillEditor"; // Make sure the QuillEditor component is correctly imported
 
 const initialState = {
   title: "",
@@ -34,12 +35,9 @@ const AddEditBlog = ({ user, setActive }) => {
   useEffect(() => {
     const uploadFile = () => {
       const originalFile = file.name;
-      // if (originalFile) {
-      // Generate a new file name
       const newFileName = `${Date.now()}_${Math.random()
         .toString(36)
         .slice(-8)}.${originalFile.split(".").pop()}`;
-      // }
 
       const storageRef = ref(storage, newFileName);
       const uploadTask = uploadBytesResumable(storageRef, file);
@@ -72,23 +70,33 @@ const AddEditBlog = ({ user, setActive }) => {
         }
       );
     };
-    file && uploadFile();
+    if (file) {
+      uploadFile();
+    }
   }, [file]);
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleDescriptionChange = useCallback(
+    (value) => {
+      setForm((prev) => ({ ...prev, description: value }));
+    },
+    [setForm]
+  );
+
   const handleTags = (tags) => {
-    setForm({ ...form, tags });
+    setForm((prev) => ({ ...prev, tags }));
   };
 
   const handleTrending = (e) => {
-    setForm({ ...form, trending: e.target.value });
+    setForm((prev) => ({ ...prev, trending: e.target.value }));
   };
 
   const onCategoryChange = (e) => {
-    setForm({ ...form, category: e.target.value });
+    setForm((prev) => ({ ...prev, category: e.target.value }));
   };
 
   const handleSubmit = async (e) => {
@@ -102,16 +110,14 @@ const AddEditBlog = ({ user, setActive }) => {
           author: user?.displayName,
           userId: user?.uid,
         });
+        navigate("/firebase-blog-app/");
+        setActive("home");
       } catch (error) {
         console.log(error);
       }
     }
-
-    navigate("firebase-blog-app/");
-    setActive("home");
   };
 
-  console.log(form);
   return (
     <div className="container-fluid mb-4">
       <div className="container">
@@ -139,13 +145,13 @@ const AddEditBlog = ({ user, setActive }) => {
                 />
               </div>
               <div className="col-12 py-3">
-                <p className="trending">Is it trending blog?&nbsp;&nbsp;</p>
+                <p className="trending">Is it a trending blog?&nbsp;&nbsp;</p>
                 <div className="form-check-inline mx-2 important-margin">
                   <input
                     type="radio"
                     className="form-check-input"
                     value="yes"
-                    name="radioOption"
+                    name="trending"
                     checked={trending === "yes"}
                     onChange={handleTrending}
                     id="radioOption1"
@@ -157,7 +163,7 @@ const AddEditBlog = ({ user, setActive }) => {
                     type="radio"
                     className="form-check-input"
                     value="no"
-                    name="radioOption"
+                    name="trending"
                     checked={trending === "no"}
                     onChange={handleTrending}
                     id="radioOption2"
@@ -173,7 +179,7 @@ const AddEditBlog = ({ user, setActive }) => {
                   onChange={onCategoryChange}
                   className="catg-dropdown"
                 >
-                  <option>Please select category</option>
+                  <option>Please select a category</option>
                   {categoryOption.map((option, index) => (
                     <option value={option || ""} key={index}>
                       {option}
@@ -182,12 +188,9 @@ const AddEditBlog = ({ user, setActive }) => {
                 </select>
               </div>
               <div className="col-12 py-3">
-                <textarea
-                  className="form-control description-box"
-                  placeholder="Description"
+                <QuillEditor
                   value={description}
-                  name="description"
-                  onChange={handleChange}
+                  onChange={handleDescriptionChange}
                 />
               </div>
               <div className="mb-3">

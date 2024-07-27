@@ -2,6 +2,7 @@ import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
+import DOMPurify from "dompurify";
 
 const Detail = ({ setActive }) => {
   const { id } = useParams();
@@ -38,7 +39,12 @@ const Detail = ({ setActive }) => {
                 By <p className="author">{blog?.author}</p> -&nbsp;
                 {blog?.timestamp.toDate().toDateString()}
               </span>
-              <p className="text-start">{blog?.description}</p>
+              <div
+                className="short-description text-start"
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(blog?.description),
+                }}
+              />
             </div>
             <div className="col-md-3">
               <h2>Tags</h2>

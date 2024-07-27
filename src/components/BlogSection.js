@@ -2,6 +2,7 @@ import React from "react";
 import { excerpt } from "../utility";
 import FontAwesome from "react-fontawesome";
 import { Link } from "react-router-dom";
+import DOMPurify from "dompurify";
 
 const BlogSection = ({ blogs, user }) => {
   return (
@@ -26,9 +27,12 @@ const BlogSection = ({ blogs, user }) => {
                 {item.timestamp.toDate().toDateString()}
               </span>
             </div>
-            <div className="short-description text-start">
-              {excerpt(item.description, 120)}
-            </div>
+            <div
+              className="short-description text-start"
+              dangerouslySetInnerHTML={{
+                __html: excerpt(DOMPurify.sanitize(item.description), 120),
+              }}
+            />
             <Link to={`/firebase-blog-app/detail/${item.id}`}>
               <button className="btn btn-read">Read More</button>
             </Link>
