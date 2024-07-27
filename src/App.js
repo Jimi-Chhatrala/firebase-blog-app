@@ -48,8 +48,14 @@ function App() {
       />
       <ToastContainer position="top-center" />
       <Routes>
-        <Route path="firebase-blog-app/" element={<Home />} />
-        <Route path="firebase-blog-app/detail/:id" element={<Detail />} />
+        <Route
+          path="firebase-blog-app/"
+          element={<Home setActive={setActive} user={user} />}
+        />
+        <Route
+          path="firebase-blog-app/detail/:id"
+          element={<Detail setActive={setActive} />}
+        />
         <Route
           path="firebase-blog-app/create"
           element={

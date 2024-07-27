@@ -1,6 +1,7 @@
 import React from "react";
 import { excerpt } from "../utility";
 import FontAwesome from "react-fontawesome";
+import { Link } from "react-router-dom";
 
 const BlogSection = ({ blogs, user }) => {
   return (
@@ -28,7 +29,9 @@ const BlogSection = ({ blogs, user }) => {
             <div className="short-description text-start">
               {excerpt(item.description, 120)}
             </div>
-            <button className="btn btn-read">Read More</button>
+            <Link to={`/firebase-blog-app/detail/${item.id}`}>
+              <button className="btn btn-read">Read More</button>
+            </Link>
             <div style={{ float: "right" }}>
               <FontAwesome
                 name="trash"
